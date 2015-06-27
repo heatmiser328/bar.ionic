@@ -2,14 +2,9 @@ angular.module('bar.controllers')
 
 .controller('BattleInitiativeCtrl', function($rootScope, $scope, $log, Dice, Initiative) {
 	$log.info('load battle initiative controller');
-    var dice = new Dice.Dice([
-    	{num: 1, low: 0, high: 9, color: 'red'},
-    	{num: 1, low: 0, high: 9, color: 'blue'}
-    ]);
-
+    var _dice = [0,0];
     $scope.show = {};
     $scope.show.results = true;
-    $scope.dice = dice.dice();
     $scope.momentum = {
     	british: 0,
         american: 0
@@ -30,27 +25,29 @@ angular.module('bar.controllers')
     	return !!$scope.show[item];
     }
     
-    $scope.onDie = function(die) {
-    	var d = dice.dieEx(die);
-        d.increment(true);
-        $scope.dice = dice.dice();
+    $scope.$watch('momentum.british', function(nv,ov) {
+    	$scope.onChange(nv);
+    });
+    $scope.$watch('momentum.american', function(nv,ov) {
+    	$scope.onChange(nv);
+    });
+    
+    $scope.onChange = function(v) {
+    	$log.debug('onChange ' + v);
         resolve();
     }
     
-    $scope.onChange = function() {
-        resolve();
-    }
-    
-    $scope.onRoll = function() {
-    	dice.roll();
-        $scope.dice = dice.dice();
+    $scope.onRoll = function(dice) {
+    	_dice = dice;
         resolve();
     }
     
     function resolve() {
-    	$log.info('Resolve initiative');
-        $log.debug('British: momentum = ' + $scope.momentum.british + ', die = ' + $scope.dice[0].value);
-        $log.debug('American: momentum = ' + $scope.momentum.american + ', die = ' + $scope.dice[1].value);
-        $scope.results.initiative = Initiative.calc($scope.battle, $scope.dice[0].value, $scope.momentum.british, $scope.dice[1].value, $scope.momentum.american);
+    	if ($scope.battle) {
+	    	$log.info('Resolve initiative');
+	        $log.debug('British: momentum = ' + $scope.momentum.british + ', die = ' + _dice[0]);
+	        $log.debug('American: momentum = ' + $scope.momentum.american + ', die = ' + _dice[1]);
+	        $scope.results.initiative = Initiative.calc($scope.battle, _dice[0], $scope.momentum.british, _dice[1], $scope.momentum.american);
+        }
     }
 });

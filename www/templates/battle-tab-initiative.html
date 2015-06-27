@@ -6,17 +6,9 @@
 	<ion-content padding="true">
 		<ion-list>
 			<ion-item class="card">
-				<div class="item item-divider row"> <!--ng-click="toggleItem('results')"-->
+				<div class="item item-divider"> <!--ng-click="toggleItem('results')"-->
 					<!--i class="icon col" ng-class="isItemShown('results') ? 'ion-arrow-down-b' : 'ion-arrow-right-b'"></i-->
-					<div class="col">
-						<button class="button button-small button-assertive" ng-click="onRoll()">
-							<img class="button-roll" src="img/dice/droll.png"></img>
-						</button>
-					</div>
-					<div class="col col-80">
-						<img class="dice-image" src="img/dice/{{dice[0].image}}.png" ng-click="onDie(1)"></img>
-						<img class="dice-image" src="img/dice/{{dice[1].image}}.png" ng-click="onDie(2)"></img>
-					</div>
+					<dice defs="[{num: 1, low: 0, high: 9, color: 'red'},{num: 1, low: 0, high: 9, color: 'blue'}]" on-roll="onRoll(dice)" />
 				</div>
 				<div class="item" ng-show="isItemShown('results')">
 					<div class="row">
@@ -33,16 +25,16 @@
 					<i class="col"></i>
 				</div>
 				<div class="item">
-					<label class="item item-input">
-						<span class="input-label">British</span>
-						<input type="number" class="col col-25 text-center" ng-model="momentum.british" ng-change="onChange()" min="-1" max="5"></input>
-		            </label>
+					<div class="row item item-input">
+						<span class="input-label col col-25">British</span>
+						<input-spin class="col col-50 text-center" value="momentum.british" min="-1" max="5" step="1" editable />
+					</div>
 				</div>
 				<div class="item">
-					<label class="item item-input">
-						<span class="input-label">American</span>
-						<input type="number" class="col col-25 text-center" ng-model="momentum.american" ng-change="onChange()" min="-1" max="5"></input>
-		            </label>
+					<div class="row item item-input">
+						<span class="input-label col col-25">American</span>
+						<input-spin class="col col-50 text-center" value="momentum.american" min="-1" max="5" step="1" editable />
+					</div>
 				</div>
 			</ion-item>
 		</ion-list>

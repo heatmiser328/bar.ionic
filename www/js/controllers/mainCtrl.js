@@ -19,8 +19,8 @@ angular.module('bar.controllers')
         if (current && current.battle) {
         	//$state.go('app.battle.turn');
             $log.debug('initial load');
-            //$location.path('/app/battle/' + current.battle + '/turn');
-            $location.path('/app/battle/' + current.battle + '/initiative');
+            $location.path('/app/battle/' + current.battle + '/turn');
+            //$location.path('/app/battle/' + current.battle + '/initiative');
         }
     })
     .catch(function(err) {

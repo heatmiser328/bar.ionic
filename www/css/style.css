@@ -1,0 +1,83 @@
+/* Empty. Add your own CSS if you like */
+.title-image {
+    margin-top: 8px;
+    height: 27px;
+}
+
+.battle-list {
+  margin-left: 20%;
+}
+.battle-item {
+  word-wrap: break-word;
+}
+.battle-image {
+    height: 50px;
+}
+
+.army-image {
+    height: 27px;
+    vertical-align: middle;
+}
+
+.order-image {
+    height: 27px;
+    vertical-align: middle;
+}
+
+.button-roll {
+    vertical-align: middle;
+    height: 37px;
+}
+
+.dice-image {
+    vertical-align: middle;
+    height: 37px;
+}
+
+/* -------------------------------------------
+		ROSTER
+----------------------------------------------  */
+.roster {
+    clear: both;
+    text-align: left;
+    width: 100%;
+}
+.rosterUnit {
+    width: 15%;
+}
+.rosterRoster {
+    width: 85%;
+}
+.rosterImage {
+    height: 1.5em;
+    width : 1em;
+    vertical-align: middle;
+}
+.rosterEntry {
+    /*display: block;*/
+    vertical-align: middle;
+    /*margin-left: 10px;*/
+}
+.rosterBrigade {
+    vertical-align: middle;
+    /*
+    overflow: auto;
+    width: 200px;
+    border: 2px solid;
+    border-color: green;
+    */
+}
+.rosterItem {
+    padding-right: 3%;
+}
+
+.rosterLeft {
+    width: 15%;
+    float: left;
+    display: inline;
+}
+.rosterRight {
+    width: 85%;
+    float: left;
+    display: inline;
+}

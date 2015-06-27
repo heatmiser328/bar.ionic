@@ -1,0 +1,11 @@
+{
+  "name": "bar",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.0.0",
+    "bootstrap": "~3.3.4",
+    "font-awesome": "~4.3.0",
+    "lodash": "~3.8.0",
+    "moment": "~2.10.2"	
+  }
+}

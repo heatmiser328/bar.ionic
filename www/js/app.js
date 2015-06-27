@@ -52,6 +52,16 @@ angular.module('bar', ['ionic', 'bar.controllers', 'bar.services', 'bar.directiv
 			}               
 		})
 
+        .state('app.battle.initiative', {
+            url: '/initiative',
+            views: {
+                'battle-initiative': {
+                    templateUrl: 'templates/battle-tab-initiative.html',
+                    controller: 'BattleInitiativeCtrl'
+                }
+            }
+        })
+
         .state('app.battle.fire', {
             url: '/fire',
             views: {

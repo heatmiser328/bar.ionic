@@ -20,7 +20,7 @@ angular.module('bar.controllers')
         	//$state.go('app.battle.turn');
             $log.debug('initial load');
             $location.path('/app/battle/' + current.battle + '/turn');
-            //$location.path('/app/battle/' + current.battle + '/initiative');
+            //$location.path('/app/battle/' + current.battle + '/armymorale');
         }
     })
     .catch(function(err) {

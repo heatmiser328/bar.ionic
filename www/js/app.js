@@ -40,7 +40,7 @@ angular.module('bar', ['ionic', 'bar.controllers', 'bar.services', 'bar.directiv
             		templateUrl: 'templates/battle.html',
 	                controller: 'BattleCtrl'
 				}
-            }                    
+            }
         })
         .state('app.battle.turn', {
         	url: '/turn',
@@ -48,8 +48,8 @@ angular.module('bar', ['ionic', 'bar.controllers', 'bar.services', 'bar.directiv
             	'battle-turn': {
 		            templateUrl: 'templates/battle-tab-turn.html',
     		        controller: 'BattleTurnCtrl'
-				}               
-			}               
+				      }
+			}
 		})
 
         .state('app.battle.initiative', {
@@ -92,8 +92,18 @@ angular.module('bar', ['ionic', 'bar.controllers', 'bar.services', 'bar.directiv
             }
         })
 
+        .state('app.battle.armymorale', {
+            url: '/armymorale',
+            views: {
+                'battle-amrymorale': {
+                    templateUrl: 'templates/battle-tab-armymorale.html',
+                    controller: 'BattleArmyMoraleCtrl'
+                }
+            }
+        })
+
         ;
-            
+
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/home');
     });

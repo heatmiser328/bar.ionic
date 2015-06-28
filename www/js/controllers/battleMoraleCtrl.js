@@ -1,66 +1,64 @@
 angular.module('bar.controllers')
 
-.controller('BattleMoraleCtrl', function($rootScope, $scope, $log, Morale, Dice) {
+.controller('BattleMoraleCtrl', function($rootScope, $scope, $log, Morale, ArmyMorale) {
 	$log.info('load battle morale controller');
-    var dice = new Dice.Dice(2, 1, 6);
-
-    $scope.morale = {};
-    $scope.morale.results = '';
-	
-    $scope.morale.moraleDie1 = 1;
-	$scope.morale.moraleDie2 = 1;
     
-    $scope.moralelevels = Morale.levels;
-    $scope.moralestates = Morale.states;
+    var _dice = [0];
+    $scope.show = {};
+    $scope.show.results = true;
+    $scope.morale = {
+    	unit: 0,
+        army: 'british',
+        leader: 0
+	};        
+    $scope.results = {
+    	initiative: ''
+	};        
     
-    $scope.morale.level = Morale.defaultLevel;
-    $scope.morale.state = Morale.defaultState;
-    $scope.morale.leader = 1;
-    $scope.morale.mod = 0;
-    
-    
-    $scope.onDie = function(die) {
-    	var d = dice.getDieEx(die);
-        d.increment(true);
-        setDice();
-        resolveMorale();
+    $scope.toggleItem = function(item) {
+    	$scope.show[item] = !$scope.show[item];
     }
     
-    $scope.onChange = function() {
-        resolveMorale();
+    $scope.isItemShown = function(item) {
+    	return !!$scope.show[item];
     }
     
-    $scope.onRoll = function() {
-    	dice.roll();
-        setDice();
-        resolveMorale();
+    $scope.reset = function() {
+    	$rootScope.$emit('reset');
     }
     
-    function setDice() {
-	    $scope.morale.moraleDie1 = dice.getDie(1);
-		$scope.morale.moraleDie2 = dice.getDie(2);
+    $scope.$watch('morale.unit', function(nv,ov) {
+    	$scope.onChange(nv);
+    });
+    $scope.$watch('morale.leader', function(nv,ov) {
+    	$scope.onChange(nv);
+    });
+    
+    $scope.onChange = function(v) {
+    	$log.debug('onChange ' + v);
+        resolve();
     }
     
-    function resolveMorale() {
-    	$log.info('Resolve morale');
-        
-        $scope.morale.results = Morale.check(
-	    		($scope.morale.moraleDie1 * 10) + $scope.morale.moraleDie2,
-                $scope.morale.level,
-                $scope.morale.leader,
-                $scope.morale.ldrloss,
-                $scope.morale.state.code,
-                $scope.morale.arty,
-                $scope.morale.wrkbde,
-                $scope.morale.wrkdiv,
-                $scope.morale.trench,
-                $scope.morale.night,
-                $scope.morale.column,
-                $scope.morale.lowammo,
-                $scope.morale.ccdefender,
-                $scope.morale.ccattacker,
-                $scope.morale.ccattackersp,
-                $scope.morale.mod);
+    $scope.onRoll = function(dice) {
+    	_dice = dice;
+        resolve();
+    }
+    
+    function resolve() {
+    	if ($scope.battle) {
+	    	$log.info('Resolve morale');
+	        var armymorale = 0;
+	        if ($scope.morale.army == 'British') {
+	        	armymorale = $scope.current.britishMorale;
+	        } else if ($scope.morale.army == 'American') {
+	        	armymorale = $scope.current.americanMorale;
+	        } else {
+	        	armymorale = $scope.current.frenchMorale;
+	        }
+	        var armymod = ArmyMorale.moraleModifier($scope.battle.moraleLevels, armymorale);
+            var result = Morale.check(_dice[0], $scope.morale.unit, armymod, $scope.morale.leader);
+	        $scope.results.morale = result ? 'Pass' : 'Fail';
+        }
     }
 });
 

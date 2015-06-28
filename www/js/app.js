@@ -102,6 +102,16 @@ angular.module('bar', ['ionic', 'bar.controllers', 'bar.services', 'bar.directiv
             }
         })
 
+        .state('app.battle.victory', {
+            url: '/victory',
+            views: {
+                'battle-victory': {
+                    templateUrl: 'templates/battle-tab-victory.html',
+                    controller: 'BattleVictoryCtrl'
+                }
+            }
+        })
+
         ;
 
         // if none of the above states are matched, use this as the fallback

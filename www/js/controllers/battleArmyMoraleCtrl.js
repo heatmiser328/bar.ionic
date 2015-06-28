@@ -12,6 +12,16 @@ angular.module('bar.controllers')
     	$scope.maxMorale = ArmyMorale.maxMorale($scope.battle.moraleLevels);
     });
     
+    $scope.$watch('current.americanMorale', function(nv,ov) {
+    	$scope.onChange(nv);
+    });
+    $scope.$watch('momentum.britishMorale', function(nv,ov) {
+    	$scope.onChange(nv);
+    });
+    $scope.$watch('momentum.frenchMorale', function(nv,ov) {
+    	$scope.onChange(nv);
+    });
+    
     $scope.onChange = function(v) {
     	$rootScope.$emit('save');
     }

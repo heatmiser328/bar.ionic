@@ -1,6 +1,6 @@
 angular.module('bar.controllers')
 
-.controller('BattleFireCtrl', function($rootScope, $scope, $log, Fire, Morale, Dice) {
+.controller('BattleFireCtrl', function($rootScope, $scope, $log, Fire) {
 	$log.info('load battle fire controller');
     var _dice = [0,0];
     $scope.show = {};
@@ -9,7 +9,7 @@ angular.module('bar.controllers')
     $scope.results = {
     	fire: ''
     };
-	
+
     $scope.fire.types = Fire.types;
     $scope.fire.type = Fire.types[0];
     $scope.fire.sps = Fire.sps;
@@ -18,29 +18,29 @@ angular.module('bar.controllers')
     $scope.fire.range = Fire.ranges[0];
     $scope.fire.modifiers = Fire.modifiers;
     $scope.fire.modifier = {};
-    
+
     $scope.reset = function() {
     	$rootScope.$emit('reset');
     }
-    
+
     $scope.toggleItem = function(item) {
     	$scope.show[item] = !$scope.show[item];
     }
-    
+
     $scope.isItemShown = function(item) {
     	return !!$scope.show[item];
     }
-    
+
     $scope.onChange = function(v) {
     	$log.debug('onChange ' + v);
         resolve();
     }
-    
+
     $scope.onRoll = function(dice) {
     	_dice = dice;
         resolve();
     }
-    
+
     function modifiers() {
     	var drm = 0;
         _.each($scope.fire.modifier, function(value, key) {
@@ -50,7 +50,7 @@ angular.module('bar.controllers')
         });
         return drm;
     }
-    
+
     function resolve() {
     	$log.info('Resolve fire');
         var drm = modifiers();
@@ -58,4 +58,3 @@ angular.module('bar.controllers')
         $scope.results.fire = Fire.resolve(_dice[0], _dice[1], $scope.fire.type, $scope.fire.strength, $scope.fire.range, drm);
     }
 });
-

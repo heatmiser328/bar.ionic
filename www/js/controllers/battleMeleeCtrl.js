@@ -1,87 +1,82 @@
 angular.module('bar.controllers')
 
-.controller('BattleMeleeCtrl', function($rootScope, $scope, $log, Melee, Dice) {
+.controller('BattleMeleeCtrl', function($rootScope, $scope, $log, Melee) {
 	$log.info('load battle melee controller');
-    var dice = new Dice.Dice(2, 1, 6);
-    var odds = 1;
-
+    var _dice = [0,0];
     $scope.show = {};
     $scope.show.results = true;
     $scope.show.attacker = true;
     $scope.show.defender = true;
-    $scope.attack = {};
-    $scope.defend = {};
-    $scope.results = '';
+    $scope.melee = {
+    	odds: Melee.odds,
+    	nationalities: Melee.nationalities,
+	    attack: {
+	    	nationality: Melee.nationalities[0],
+	        morale: 0,
+	        leader: 0,
+	        tacticalldr: false,
+	        diversion: false,
+	        modifiers: Melee.attackmodifiers,
+	        modifier: {}
+	    },
+        defend: {
+	    	nationality: Melee.nationalities[0],
+	        morale: 0,
+	        leader: 0,
+	        tacticalldr: false,
+	        modifiers: Melee.defendmodifiers,
+	        modifier: {}
+	    }
+    };
+    $scope.results = {
+    	odds: Melee.odds[2],
+    	melee: ''
+    };
 	
-    $scope.attack.level = Melee.defaultLevel;
-    $scope.defend.aa = true;
-    
-    $scope.meleeDie = 1;
-	$scope.tieBreakerDie = 1;
+    $scope.reset = function() {
+    	$rootScope.$emit('reset');
+    }
     
     $scope.toggleItem = function(item) {
     	$scope.show[item] = !$scope.show[item];
     }
+    
     $scope.isItemShown = function(item) {
     	return !!$scope.show[item];
     }
     
-    $scope.onDie = function(die) {
-    	var d = dice.getDieEx(die);
-        d.increment(true);
-        setDice();
-        resolveMelee();
+    $scope.onChange = function(v) {
+    	$log.debug('onChange ' + v);
+        resolve();
     }
     
-    $scope.onChange = function() {
-    	calcOdds();
-        resolveMelee();
+    $scope.onRoll = function(dice) {
+    	_dice = dice;
+        resolve();
     }
     
-    $scope.onRoll = function() {
-    	dice.roll();
-        setDice();
-        resolveMelee();
+    function modifiers(selected, mods) {
+    	var drm = 0;
+        _.each(selected, function(value, key) {
+        	if (value) {
+            	var m = _.find(mods, function(m) {
+                	return m.name == key;
+				}) || {value: 0};
+                drm += m.value;
+            }
+        });
+        return drm;
     }
     
-    function setDice() {
-	    $scope.meleeDie = dice.getDie(1);
-		$scope.tieBreakerDie = dice.getDie(2);
-    }
-    
-    function defenderLevels() {
-    	var levels = [];
-        if ($scope.defend.aa) {
-            levels.push(Melee.levelAA);
-        }
-        if ($scope.defend.ab) {
-            levels.push(Melee.levelAB);
-        }
-        if ($scope.defend.a) {
-            levels.push(Melee.levelA);
-        }
-        if ($scope.defend.b) {
-            levels.push(Melee.levelB);
-        }
-        if ($scope.defend.c) {
-            levels.push(Melee.levelC);
-        }
-        if ($scope.defend.arty) {
-            levels.push(Melee.levelArty);
-        }
-    	return levels;
-    }
-    
-    function calcOdds() {
-    	odds = Melee.calcOdds([$scope.attack.level], defenderLevels(), $scope.defend.trench);
-        $scope.odds = odds ? odds.text : '';
-    }
-    
-    function resolveMelee() {
+    function resolve() {
     	$log.info('Resolve melee');
-        $scope.results = Melee.assault($scope.meleeDie, $scope.tieBreakerDie, odds ? odds.odds : 1, $scope.attack.wrkbde, $scope.defend.wrkbde, $scope.defend.wrkdiv);
+        var attackdrm = modifiers($scope.melee.attack.modifier, Melee.attackmodifiers);
+        var defenddrm = modifiers($scope.melee.defend.modifier, Melee.defendmodifiers);
+        //$log.debug('Hit: ' + _dice[0] + ', Damage: ' + _dice[1] + ', Type: ' + $scope.fire.type + ', SPs: ' + $scope.fire.strength + ', Range: ' + $scope.fire.range + ', DRM: ' + drm);
+        $scope.results.melee = Melee.resolve(_dice[0], _dice[1], $scope.results.odds, 
+        									$scope.melee.attack.morale, $scope.melee.attack.nationality, $scope.melee.attack.leader, $scope.melee.attack.tacticalldr, $scope.melee.attack.diversion, attackdrm, 
+                                            $scope.melee.defend.morale, $scope.melee.defend.nationality, $scope.melee.defend.leader, $scope.melee.defend.tacticalldr, defenddrm);
     }
     
-    calcOdds();
 });
 

@@ -112,8 +112,8 @@ angular.module('bar.services')
 	    attackmodifiers: attackmodifiers,
 	    defendmodifiers: defendmodifiers,
 	    resolve: function(combatdie, tacticaldie, odds, 
-	    					attackmorale, attackarmymorale, attackleader, attacktacticaldrm, attackdiversion, attackdrm, 
-	                        defendmorale, defendarmymorale, defendleader, defendtacticaldrm, defenddrm) {
+	    					attackmorale, attacknationality, attackleader, attacktacticaldrm, attackdiversion, attackdrm, 
+	                        defendmorale, defendnationality, defendleader, defendtacticaldrm, defenddrm) {
 			var index = combatdie 
 						+ tacticalDrm(tacticaldie, attacktacticaldrm, defendtacticaldrm) 
 						+ attackmorale + attackleader + attackdrm

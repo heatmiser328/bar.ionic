@@ -5,61 +5,7 @@ angular.module('bar.services')
 	var types = ['Rifle v Other','Rifle v Arty','Arty v All'];
 	var sps = ['1','2','3-5','6-9','10+'];
 	var ranges = ['Adjacent', '2-3 hexes'];
-	var modifiers = [
-		{
-	    	name: 'Forest / Lt Forest',
-	        value: -1
-	    },
-		{
-	    	name: 'Orchard',
-	        value: -1
-	    },
-		{
-	    	name: 'Blackjack',
-	        value: -1
-	    },
-		{
-	    	name: 'Lt Infantry',
-	        value: -1
-	    },
-		{
-	    	name: 'Arty / Dragoons',
-	        value: 1
-	    },
-		{
-	    	name: 'First Volley',
-	        value: 1
-	    },
-		{
-	    	name: "Ferguson's Rifles",
-	        value: 1
-	    },
-		{
-	    	name: 'Fieldworks',
-	        value: -1
-	    },
-		{
-	    	name: 'Meeting House',
-	        value: -2
-	    },
-		{
-	    	name: 'Guilford CH',
-	        value: -1
-	    },
-		{
-	    	name: 'McCuiston PH',
-	        value: -1
-	    },
-		{
-	    	name: 'Wantoot PH',
-	        value: -2
-	    },
-		{
-	    	name: 'Santee River',
-	        value: 1
-	    }
-	];
-
+    
 	var tohit = {
 		'Adjacent': {
 	    	'1': 7,
@@ -150,13 +96,6 @@ angular.module('bar.services')
 		types: types,
 	    sps: sps,
 	    ranges: ranges,
-	    modifiers: modifiers,
-	    modifier: function(name) {
-        	var m = _.find(modifiers, function(modifier) {
-            	return (name == modifier.name);
-            });
-            return m ? m.value : 0;
-	    },
 	    resolve: function(hitdie, damagedie, type, sps, range, drm) {
 	    	if ((hitdie+drm) >= tohit[range][sps]) {
 	        	var rt = results[type];

@@ -16,7 +16,7 @@ angular.module('bar.controllers')
 	        leader: 0,
 	        tacticalldr: false,
 	        diversion: false,
-	        modifiers: Melee.attackmodifiers,
+	        modifiers: [],
 	        modifier: {}
 	    },
         defend: {
@@ -24,7 +24,7 @@ angular.module('bar.controllers')
 	        morale: 0,
 	        leader: 0,
 	        tacticalldr: false,
-	        modifiers: Melee.defendmodifiers,
+	        modifiers: [],
 	        modifier: {}
 	    }
     };
@@ -36,6 +36,11 @@ angular.module('bar.controllers')
     $scope.reset = function() {
     	$rootScope.$emit('reset');
     }
+    
+    $rootScope.$on('loaded', function(e) {
+    	$scope.melee.attack.modifiers = $scope.battle.modifiers.melee.attack;
+    	$scope.melee.defend.modifiers = $scope.battle.modifiers.melee.defend;
+    });
     
     $scope.toggleItem = function(item) {
     	$scope.show[item] = !$scope.show[item];

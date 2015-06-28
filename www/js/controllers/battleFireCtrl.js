@@ -16,13 +16,17 @@ angular.module('bar.controllers')
     $scope.fire.strength = Fire.sps[0];
     $scope.fire.ranges = Fire.ranges;
     $scope.fire.range = Fire.ranges[0];
-    $scope.fire.modifiers = Fire.modifiers;
+    $scope.fire.modifiers = [];
     $scope.fire.modifier = {};
 
     $scope.reset = function() {
     	$rootScope.$emit('reset');
     }
-
+    
+    $rootScope.$on('loaded', function(e) {
+    	$scope.fire.modifiers = $scope.battle.modifiers.fire;
+    });
+    
     $scope.toggleItem = function(item) {
     	$scope.show[item] = !$scope.show[item];
     }
@@ -45,7 +49,10 @@ angular.module('bar.controllers')
     	var drm = 0;
         _.each($scope.fire.modifier, function(value, key) {
         	if (value) {
-            	drm += Fire.modifier(key);
+	        	var m = _.find($scope.fire.modifiers, function(modifier) {
+	            	return (key == modifier.name);
+	            });
+            	drm += (m ? m.value : 0);
             }
         });
         return drm;

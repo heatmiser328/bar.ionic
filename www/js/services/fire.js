@@ -153,7 +153,7 @@ angular.module('bar.services')
 	    modifiers: modifiers,
 	    modifier: function(name) {
         	var m = _.find(modifiers, function(modifier) {
-            	return (name == modifiers[i].name);
+            	return (name == modifier.name);
             });
             return m ? m.value : 0;
 	    },

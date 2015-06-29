@@ -22,18 +22,21 @@ angular.module('bar.controllers')
     }
 
     function updateDate() {
-        var dt = moment($scope.battle.startDateTime);
-        var o = ($scope.current.turn - 1) * TURN_MINS;
-        dt.add(o, 'minutes');
-		    $log.debug('turn: ' + dt.format("MMM DD, YYYY HH:mm A"));
-        $scope.turn = dt.toDate();
+    	if ($scope.battle) {
+	        var dt = moment($scope.battle.startDateTime);
+	        var o = ($scope.current.turn - 1) * TURN_MINS;
+	        dt.add(o, 'minutes');
+            $log.debug('turn: ' + dt.format("MMM DD, YYYY HH:mm A"));
+	        $scope.turn = dt.toDate();
+		}            
     }
 
     function updatePhase() {
-        $log.debug('phase: ' + $scope.current.phase);
-        $scope.phase = Phases.get($scope.current.phase);
+    	if ($scope.battle) {
+	        $log.debug('phase: ' + $scope.current.phase);
+    	    $scope.phase = Phases.get($scope.current.phase);
+		}            
     }
-
 
     $scope.turnPrev = function() {
     	$log.debug('previous turn');
@@ -84,4 +87,6 @@ angular.module('bar.controllers')
 	        updatePhase();
 		}
     }
+    
+    update();
 });

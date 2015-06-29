@@ -95,7 +95,7 @@ angular.module('bar', ['ionic', 'bar.controllers', 'bar.services', 'bar.directiv
         .state('app.battle.armymorale', {
             url: '/armymorale',
             views: {
-                'battle-amrymorale': {
+                'battle-armymorale': {
                     templateUrl: 'templates/battle-tab-armymorale.html',
                     controller: 'BattleArmyMoraleCtrl'
                 }

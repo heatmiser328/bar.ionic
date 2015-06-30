@@ -16,7 +16,6 @@ angular.module('bar.controllers')
 	        leader: 0,
 	        tacticalldr: false,
 	        diversion: false,
-	        modifiers: [],
 	        modifier: {}
 	    },
         defend: {
@@ -24,7 +23,6 @@ angular.module('bar.controllers')
 	        morale: 0,
 	        leader: 0,
 	        tacticalldr: false,
-	        modifiers: [],
 	        modifier: {}
 	    }
     };
@@ -36,11 +34,6 @@ angular.module('bar.controllers')
     $scope.reset = function() {
     	$rootScope.$emit('reset');
     }
-    
-    $rootScope.$on('loaded', function(e) {
-    	$scope.melee.attack.modifiers = $scope.battle.modifiers.melee.attack;
-    	$scope.melee.defend.modifiers = $scope.battle.modifiers.melee.defend;
-    });
     
     $scope.toggleItem = function(item) {
     	$scope.show[item] = !$scope.show[item];
@@ -75,8 +68,8 @@ angular.module('bar.controllers')
     
     function resolve() {
     	$log.info('Resolve melee');
-        var attackdrm = modifiers($scope.melee.attack.modifier, Melee.attackmodifiers);
-        var defenddrm = modifiers($scope.melee.defend.modifier, Melee.defendmodifiers);
+        var attackdrm = modifiers($scope.melee.attack.modifier, $scope.battle.modifiers.melee.attack);
+        var defenddrm = modifiers($scope.melee.defend.modifier, $scope.battle.modifiers.melee.defend);
         //$log.debug('Hit: ' + _dice[0] + ', Damage: ' + _dice[1] + ', Type: ' + $scope.fire.type + ', SPs: ' + $scope.fire.strength + ', Range: ' + $scope.fire.range + ', DRM: ' + drm);
         $scope.results.melee = Melee.resolve(_dice[0], _dice[1], $scope.results.odds, 
         									$scope.melee.attack.morale, $scope.melee.attack.nationality, $scope.melee.attack.leader, $scope.melee.attack.tacticalldr, $scope.melee.attack.diversion, attackdrm, 

@@ -23,10 +23,6 @@ angular.module('bar.controllers')
     	$rootScope.$emit('reset');
     }
     
-    $rootScope.$on('loaded', function(e) {
-    	$scope.fire.modifiers = $scope.battle.modifiers.fire;
-    });
-    
     $scope.toggleItem = function(item) {
     	$scope.show[item] = !$scope.show[item];
     }
@@ -49,7 +45,7 @@ angular.module('bar.controllers')
     	var drm = 0;
         _.each($scope.fire.modifier, function(value, key) {
         	if (value) {
-	        	var m = _.find($scope.fire.modifiers, function(modifier) {
+	        	var m = _.find($scope.battle.modifiers.fire, function(modifier) {
 	            	return (key == modifier.name);
 	            });
             	drm += (m ? m.value : 0);

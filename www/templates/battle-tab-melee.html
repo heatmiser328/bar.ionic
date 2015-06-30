@@ -48,7 +48,7 @@
 						<ion-item>
 							<ion-checkbox ng-model="melee.attack.diversion" ng-change="onChange()">Diversion</ion-checkbox>
 						</ion-item>
-						<ion-item ng-repeat="m in melee.attack.modifiers">
+						<ion-item ng-repeat="m in battle.modifiers.melee.attack">
 							<ion-checkbox ng-model="melee.attack.modifier[m.name]" ng-change="onChange()">{{m.name}}</ion-checkbox>
 						</ion-item>
 					</ion-list>
@@ -79,7 +79,7 @@
 						<ion-item>
 							<ion-checkbox ng-model="melee.defend.tacticalldr" ng-change="onChange()">Tactical Leader</ion-checkbox>
 						</ion-item>
-						<ion-item ng-repeat="m in melee.defend.modifiers">
+						<ion-item ng-repeat="m in battle.modifiers.melee.defend">
 							<ion-checkbox ng-model="melee.defend.modifier[m.name]" ng-change="onChange()">{{m.name}}</ion-checkbox>
 						</ion-item>
 					</ion-list>

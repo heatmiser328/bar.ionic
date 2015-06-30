@@ -32,7 +32,7 @@
 				    <select ng-model="fire.range" ng-options="r for r in fire.ranges" ng-change="onChange()" required></select>
 	            </label>
 				<ion-list>
-					<ion-item ng-repeat="m in fire.modifiers">
+					<ion-item ng-repeat="m in battle.modifiers.fire">
 						<ion-checkbox ng-model="fire.modifier[m.name]" ng-change="onChange()">{{m.name}}</ion-checkbox>
 					</ion-item>
 				</ion-list>

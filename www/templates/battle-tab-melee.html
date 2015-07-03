@@ -11,14 +11,16 @@
 					<dice defs="[{num: 1, low: 0, high: 9, color: 'red'},{num: 1, low: 0, high: 9, color: 'white'}]" on-roll="onRoll(dice)" />
 				</div>
 				<div class="item" ng-show="isItemShown('results')">
-					<label class="item item-input item-select">
-						<span class="input-label">Odds</span>
-					    <select ng-model="results.odds" ng-options="o for o in melee.odds" ng-change="onChange()" required></select>
-		            </label>
 					<div class="row">
 						<span class="item-label col col-20">Result</span>
 						<input class="col col-80" type="text" ng-model="results.melee" readonly />
 					</div>
+				</div>
+				<div class="item">
+					<label class="item item-input item-select">
+						<span class="input-label">Odds</span>
+					    <select ng-model="results.odds" ng-options="o for o in melee.odds" ng-change="onChange()" required></select>
+		            </label>
 				</div>
 			</ion-item>
 

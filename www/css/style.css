@@ -14,14 +14,23 @@
     height: 50px;
 }
 
-.army-image {
-    height: 27px;
-    vertical-align: middle;
+.battle-image-lg {
+    height: 115px;
+    margin-top: 10%;
 }
 
-.order-image {
-    height: 27px;
-    vertical-align: middle;
+.turn {
+  margin-left: 4%;
+  margin-top: 50px;
+}
+
+.battle-tabs {
+  /*margin-top: -100px;*/
+  background: blue;
+}
+
+.has-header.has-tabs {
+    top: -4%;
 }
 
 .button-roll {
@@ -32,52 +41,4 @@
 .dice-image {
     vertical-align: middle;
     height: 37px;
-}
-
-/* -------------------------------------------
-		ROSTER
-----------------------------------------------  */
-.roster {
-    clear: both;
-    text-align: left;
-    width: 100%;
-}
-.rosterUnit {
-    width: 15%;
-}
-.rosterRoster {
-    width: 85%;
-}
-.rosterImage {
-    height: 1.5em;
-    width : 1em;
-    vertical-align: middle;
-}
-.rosterEntry {
-    /*display: block;*/
-    vertical-align: middle;
-    /*margin-left: 10px;*/
-}
-.rosterBrigade {
-    vertical-align: middle;
-    /*
-    overflow: auto;
-    width: 200px;
-    border: 2px solid;
-    border-color: green;
-    */
-}
-.rosterItem {
-    padding-right: 3%;
-}
-
-.rosterLeft {
-    width: 15%;
-    float: left;
-    display: inline;
-}
-.rosterRight {
-    width: 85%;
-    float: left;
-    display: inline;
 }

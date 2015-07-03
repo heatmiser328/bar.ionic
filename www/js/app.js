@@ -42,15 +42,6 @@ angular.module('bar', ['ionic', 'bar.controllers', 'bar.services', 'bar.directiv
 				}
             }
         })
-        .state('app.battle.turn', {
-        	url: '/turn',
-            views: {
-            	'battle-turn': {
-		            templateUrl: 'templates/battle-tab-turn.html',
-    		        controller: 'BattleTurnCtrl'
-				      }
-			}
-		})
 
         .state('app.battle.initiative', {
             url: '/initiative',

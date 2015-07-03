@@ -17,10 +17,9 @@ angular.module('bar.controllers')
         $scope.battles = data;
         var current = Current.load();
         if (current && current.battle) {
-        	//$state.go('app.battle.turn');
             $log.debug('initial load');
-            $location.path('/app/battle/' + current.battle + '/initiative');
-            //$location.path('/app/battle/' + current.battle + '/melee');
+        	//$state.go('app.battle.turn');
+            $location.path('/app/battle/' + current.battle + '/turn');
         }
     })
     .catch(function(err) {

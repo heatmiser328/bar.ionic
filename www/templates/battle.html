@@ -1,27 +1,7 @@
-<div class="turn">
-	<div class="row">
-		<div class="col col-20">
-			<img class="battle-image-lg" src="img/{{battle.image}}" />
-		</div>
-		<div class="col col-80">
-			<div class="col">
-				<div class="row">
-					<button class="col-10 button button-positive ion-chevron-left" ng-click="turnPrev()"></button>
-					<input  class="col-80 text-center" type="text" readonly="readonly" value="{{turn | date:'MMM d, y h:mm a'}}" />
-					<button class="col-10 button button-positive ion-chevron-right" ng-click="turnNext()"></button>
-				</div>
-			</div>
-			<div class="col">
-				<div class="row">
-					<button class="col-10 button button-positive ion-chevron-left" ng-click="phasePrev()"></button>
-					<input class="col-80 text-center" type="text" readonly="readonly" value="{{phase}}">
-					<button class="col-10 button button-positive ion-chevron-right" ng-click="phaseNext()"></button>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 <ion-tabs class="tabs-icon-top tabs-color-active-positive battle-tabs" hide-nav-bar="true">
+	<ion-tab title="Turn" icon-off="ion-ios-clock-outline" icon-on="ion-ios-clock" href="#/app/battle/{{battle.id}}/turn">
+		<ion-nav-view name="battle-turn"></ion-nav-view>
+	</ion-tab>
 
 	<ion-tab title="Initiative" icon-off="ion-ios-list-outline" icon-on="ion-ios-list" href="#/app/battle/{{battle.id}}/initiative">
 		<ion-nav-view name="battle-initiative"></ion-nav-view>

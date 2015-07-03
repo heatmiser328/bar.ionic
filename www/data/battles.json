@@ -113,7 +113,7 @@
 	            ]
             }
         },
-        
+
         "startDateTime": "1777-09-11T12:00:00Z",
     	"startBritishMorale": 20,
         "startAmericanMorale": 20,
@@ -177,7 +177,7 @@
 	            ]
             }
         },
-    	"startDateTimeMorale": "1781-03-15T10:00:00Z",
+    	"startDateTime": "1781-03-15T10:00:00Z",
     	"startBritishMorale": 14,
         "startAmericanMorale": 14,
         "startFrenchMorale": 0

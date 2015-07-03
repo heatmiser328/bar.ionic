@@ -1,10 +1,16 @@
 <div class="row"> 
-	<div class="col">
+	<div class="col-20">
 		<button class="button button-small button-assertive" ng-click="onRoll()">
 			<img class="button-roll" src="img/dice/droll.png"></img>
 		</button>
 	</div>
-	<div class="col col-80">
+	<div class="col">
 		<img ng-repeat="die in dice" class="dice-image" src="img/dice/{{die.image}}.png" ng-click="onDie($index+1)"></img>
+	</div>
+	<div class="col" ng-show="includeResult">
+		<label class="item item-input">
+			<span class="input-label">Result</span>
+			<input class="col col-80 result" type="text" ng-model="result" readonly />
+		</label>
 	</div>
 </div>

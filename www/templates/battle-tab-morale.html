@@ -8,13 +8,7 @@
 			<ion-item class="card">
 				<div class="item item-divider"> <!--ng-click="toggleItem('results')"-->
 					<!--i class="icon col" ng-class="isItemShown('results') ? 'ion-arrow-down-b' : 'ion-arrow-right-b'"></i-->
-					<dice defs="[{num: 1, low: 0, high: 9, color: 'white'}]" on-roll="onRoll(dice)" />
-				</div>
-				<div class="item" ng-show="isItemShown('results')">
-					<div class="row">
-						<span class="item-label col col-20">Result</span>
-						<input class="col col-80" type="text" ng-model="results.morale" readonly />
-					</div>
+					<dice defs="[{num: 1, low: 0, high: 9, color: 'white'}]" on-roll="onRoll(dice)" result="results.morale" />
 				</div>
 			</ion-item>
 		

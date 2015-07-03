@@ -2,7 +2,7 @@ angular.module('bar.controllers')
 
 .controller('BattleMoraleCtrl', function($rootScope, $scope, $log, Morale, ArmyMorale) {
 	$log.info('load battle morale controller');
-    
+
     var _dice = [0];
     $scope.show = {};
     $scope.show.results = true;
@@ -10,40 +10,40 @@ angular.module('bar.controllers')
     	unit: 0,
         army: 'british',
         leader: 0
-	};        
+	};
     $scope.results = {
-    	initiative: ''
-	};        
-    
+    	morale: ''
+	};
+
     $scope.toggleItem = function(item) {
     	$scope.show[item] = !$scope.show[item];
     }
-    
+
     $scope.isItemShown = function(item) {
     	return !!$scope.show[item];
     }
-    
+
     $scope.reset = function() {
     	$rootScope.$emit('reset');
     }
-    
+
     $scope.$watch('morale.unit', function(nv,ov) {
     	$scope.onChange(nv);
     });
     $scope.$watch('morale.leader', function(nv,ov) {
     	$scope.onChange(nv);
     });
-    
+
     $scope.onChange = function(v) {
     	$log.debug('onChange ' + v);
         resolve();
     }
-    
+
     $scope.onRoll = function(dice) {
     	_dice = dice;
         resolve();
     }
-    
+
     function resolve() {
     	if ($scope.battle) {
 	    	$log.info('Resolve morale');
@@ -61,4 +61,3 @@ angular.module('bar.controllers')
         }
     }
 });
-

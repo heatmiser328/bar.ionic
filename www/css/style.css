@@ -42,3 +42,7 @@
     vertical-align: middle;
     height: 37px;
 }
+
+.result {
+    font-weight: bold;
+}

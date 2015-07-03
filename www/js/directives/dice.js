@@ -5,6 +5,7 @@ angular.module('bar.directives')
         restrict: 'E',
         scope: {
             defs: '=defs',
+            result: '=result',
             roll: '&onRoll'
         },
         templateUrl: 'templates/dice.html',
@@ -14,6 +15,7 @@ angular.module('bar.directives')
 .controller('DiceDirectiveController', ['$scope', '$log', 'Dice', function ($scope, $log, Dice) {
     var dice = new Dice.Dice($scope.defs);
     $scope.dice = dice.dice();
+    $scope.includeResult = typeof $scope.result != 'undefined';
     
     $scope.onDie = function(die) {
     	var d = dice.dieEx(die);
